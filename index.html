@@ -21,6 +21,13 @@
       <button type="submit" id="add-button" class="add-button">Add</button>
     </form>
 
+    <!-- Filter controls: show All, only Active, or only Completed todos. -->
+    <div id="filters" class="filters">
+      <button type="button" class="filter-button active" data-filter="all">All</button>
+      <button type="button" class="filter-button" data-filter="active">Active</button>
+      <button type="button" class="filter-button" data-filter="completed">Completed</button>
+    </div>
+
     <ul id="todo-list" class="todo-list"></ul>
   </main>
 

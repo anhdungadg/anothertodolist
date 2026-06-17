@@ -2,11 +2,13 @@
 // Step 2: add-todo behavior.
 // Step 3: complete (toggle) and delete behavior via event delegation.
 // Step 4: localStorage persistence with a todos array as the source of truth.
+// Step 5: filter view (All / Active / Completed) applied at render time.
 
 // Cache references to the DOM elements we'll work with.
 const form = document.getElementById("todo-form");
 const input = document.getElementById("todo-input");
 const list = document.getElementById("todo-list");
+const filters = document.getElementById("filters");
 
 // Key under which the todo list is stored in localStorage.
 const STORAGE_KEY = "todos";
@@ -15,6 +17,11 @@ const STORAGE_KEY = "todos";
 // { text: string, completed: boolean }. The DOM is always rebuilt from
 // this array, never edited directly, so the two can't drift apart.
 let todos = [];
+
+// Which todos are currently visible. One of "all", "active", or "completed".
+// This is view-only state — it never changes the todos array itself, only
+// which entries render() chooses to display.
+let currentFilter = "all";
 
 // Load any previously saved todos from localStorage. Returns an array;
 // falls back to an empty list if nothing is saved or the data is corrupt.
@@ -46,6 +53,16 @@ function render() {
   list.innerHTML = "";
 
   todos.forEach(function (todo, index) {
+    // Apply the current filter: skip any todo that doesn't match. We still
+    // iterate the full array so `index` stays aligned with the source of
+    // truth — that's what click handling maps back to.
+    if (currentFilter === "active" && todo.completed) {
+      return;
+    }
+    if (currentFilter === "completed" && !todo.completed) {
+      return;
+    }
+
     // Build the list item that holds this todo.
     const item = document.createElement("li");
     item.className = "todo-item";
@@ -129,6 +146,26 @@ function handleListClick(event) {
   render();
 }
 
+// Handle clicks on the filter buttons. Updates currentFilter, moves the
+// "active" highlight to the clicked button, and re-renders the list.
+function handleFilterClick(event) {
+  const button = event.target.closest(".filter-button");
+  if (!button) {
+    return;
+  }
+
+  // Switch the view to the clicked button's filter.
+  currentFilter = button.dataset.filter;
+
+  // Highlight only the selected button.
+  filters.querySelectorAll(".filter-button").forEach(function (btn) {
+    btn.classList.toggle("active", btn === button);
+  });
+
+  // Re-render so only matching todos show.
+  render();
+}
+
 function init() {
   // Load saved todos and render them before wiring up interactions.
   todos = loadTodos();
@@ -139,6 +176,9 @@ function init() {
 
   // One delegated listener handles toggling and deleting every todo.
   list.addEventListener("click", handleListClick);
+
+  // One delegated listener handles all three filter buttons.
+  filters.addEventListener("click", handleFilterClick);
 }
 
 init();

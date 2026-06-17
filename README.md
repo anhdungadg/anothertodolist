@@ -22,7 +22,7 @@ Then visit http://localhost:8000.
 
 ## Status
 
-Fully functional. Todos can be added, completed, and deleted, and the list is saved to `localStorage` so it survives page reloads.
+Fully functional. Todos can be added, completed, deleted, and filtered (All / Active / Completed), and the list is saved to `localStorage` so it survives page reloads.
 
 ## Roadmap
 
@@ -30,3 +30,4 @@ Fully functional. Todos can be added, completed, and deleted, and the list is sa
 - [x] Delete a todo
 - [x] Mark a todo as complete
 - [x] Persist todos in `localStorage`
+- [x] Filter todos (All / Active / Completed)
