@@ -83,3 +83,44 @@ h1 {
   margin: 0;
   padding: 0;
 }
+
+/* A single todo row: text on the left, Delete button on the right. */
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
+}
+
+/* The todo text fills the row and acts as the click-to-toggle target. */
+.todo-text {
+  flex: 1;
+  cursor: pointer;
+}
+
+/* Applied by JS when a todo is marked complete. */
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.delete-button {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.delete-button:hover {
+  color: #fff;
+  background: #ef4444;
+  border-color: #ef4444;
+}
