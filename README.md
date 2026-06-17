@@ -8,7 +8,7 @@ A simple Todo List web app built with plain HTML, CSS, and vanilla JavaScript â€
 | ------------ | ---------------------------------------------------- |
 | `index.html` | Page markup: title, input box, Add button, todo list |
 | `style.css`  | Clean, modern styling                                |
-| `app.js`     | Application logic (scaffold only for now)            |
+| `app.js`     | Application logic (todos array, render, persistence) |
 
 ## Running
 
@@ -22,11 +22,11 @@ Then visit http://localhost:8000.
 
 ## Status
 
-This is the initial scaffold. The UI is in place; add and delete behavior are not yet implemented.
+Fully functional. Todos can be added, completed, and deleted, and the list is saved to `localStorage` so it survives page reloads.
 
 ## Roadmap
 
-- [ ] Add a todo
-- [ ] Delete a todo
-- [ ] Mark a todo as complete
-- [ ] Persist todos in `localStorage`
+- [x] Add a todo
+- [x] Delete a todo
+- [x] Mark a todo as complete
+- [x] Persist todos in `localStorage`
